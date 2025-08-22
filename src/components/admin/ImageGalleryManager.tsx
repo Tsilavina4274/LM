@@ -29,6 +29,7 @@ interface GalleryImage {
   service: string;
   uploadDate: string;
   tags: string[];
+  publiee: boolean; // Nouvelle propriété pour gérer la publication
 }
 
 const ImageGalleryManager = () => {
