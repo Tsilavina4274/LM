@@ -127,10 +127,10 @@ const Admin = () => {
               <Images className="w-4 h-4 mr-2" />
               Galerie
             </TabsTrigger>
-            <TabsTrigger value="settings" className="data-[state=active]:bg-red-600">
+            {/* <TabsTrigger value="settings" className="data-[state=active]:bg-red-600">
               <Settings className="w-4 h-4 mr-2" />
               Paramètres
-            </TabsTrigger>
+            </TabsTrigger> */}
           </TabsList>
 
           {/* Tableau de bord */}

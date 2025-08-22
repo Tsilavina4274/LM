@@ -329,12 +329,12 @@ const BookingManager = () => {
         <h2 className="text-2xl font-bold text-white">Gestion des rendez-vous</h2>
         
         <Dialog open={isAddModalOpen} onOpenChange={setIsAddModalOpen}>
-          <DialogTrigger asChild>
+          {/* <DialogTrigger asChild>
             <Button className="bg-red-600 hover:bg-red-700">
               <Plus className="w-4 h-4 mr-2" />
               Nouveau rendez-vous
             </Button>
-          </DialogTrigger>
+          </DialogTrigger> */}
           <DialogContent className="bg-gray-800 border-gray-700 text-white max-w-3xl max-h-[90vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle>Ajouter un nouveau rendez-vous</DialogTitle>

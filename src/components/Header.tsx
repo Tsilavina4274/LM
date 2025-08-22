@@ -47,7 +47,12 @@ const Header = () => {
             >
               Accueil
             </button>
-
+             <button
+              onClick={() => scrollToSection('apropos')}
+              className="text-foreground hover:text-primary transition-colors"
+            >
+              À propos
+            </button>
             {/* Menu déroulant Services */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -74,13 +79,6 @@ const Header = () => {
                 ))}
               </DropdownMenuContent>
             </DropdownMenu>
-
-            <button
-              onClick={() => scrollToSection('apropos')}
-              className="text-foreground hover:text-primary transition-colors"
-            >
-              À propos
-            </button>
             <button
               onClick={() => scrollToSection('galerie')}
               className="text-foreground hover:text-primary transition-colors"
@@ -127,6 +125,13 @@ const Header = () => {
                 Accueil
               </button>
 
+              <button
+                onClick={() => scrollToSection('apropos')}
+                className="text-left text-foreground hover:text-primary transition-colors"
+              >
+                À propos
+              </button>
+              
               {/* Services avec sous-menu mobile */}
               <div className="space-y-2">
                 <button
@@ -148,12 +153,6 @@ const Header = () => {
                 </div>
               </div>
 
-              <button
-                onClick={() => scrollToSection('apropos')}
-                className="text-left text-foreground hover:text-primary transition-colors"
-              >
-                À propos
-              </button>
               <button
                 onClick={() => scrollToSection('galerie')}
                 className="text-left text-foreground hover:text-primary transition-colors"
