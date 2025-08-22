@@ -141,6 +141,204 @@ All colors MUST be HSL.
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* LM Detailing Brand Components */
+  .btn-lm-primary {
+    @apply bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800
+           text-white font-semibold px-6 py-3 rounded-lg
+           transition-all duration-300 ease-in-out
+           hover:shadow-lg hover:scale-105
+           focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2;
+  }
+
+  .btn-lm-secondary {
+    @apply bg-black hover:bg-gray-900 text-white font-semibold px-6 py-3 rounded-lg
+           transition-all duration-300 ease-in-out
+           hover:shadow-lg hover:scale-105
+           focus:outline-none focus:ring-2 focus:ring-gray-800 focus:ring-offset-2;
+  }
+
+  .btn-lm-outline {
+    @apply border-2 border-red-600 text-red-600 hover:bg-red-600 hover:text-white
+           font-semibold px-6 py-3 rounded-lg
+           transition-all duration-300 ease-in-out
+           hover:shadow-lg hover:scale-105
+           focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2;
+  }
+
+  .card-lm {
+    @apply bg-white dark:bg-gray-900 rounded-xl shadow-lg
+           border border-gray-200 dark:border-gray-800
+           transition-all duration-300 ease-in-out
+           hover:shadow-xl hover:-translate-y-1;
+  }
+
+  .card-lm-interactive {
+    @apply card-lm cursor-pointer
+           hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.02]
+           active:scale-[0.98];
+  }
+
+  .section-lm {
+    @apply py-20 px-4;
+  }
+
+  .container-lm {
+    @apply container mx-auto max-w-7xl;
+  }
+
+  .text-lm-gradient {
+    @apply bg-gradient-to-r from-red-600 to-red-800 bg-clip-text text-transparent;
+  }
+
+  .bg-lm-gradient {
+    background: var(--gradient-red);
+  }
+
+  .bg-lm-gradient-dark {
+    background: var(--gradient-black);
+  }
+
+  .bg-lm-gradient-hero {
+    background: var(--gradient-red-black);
+  }
+
+  .shadow-lm-red {
+    box-shadow: var(--shadow-red);
+  }
+
+  .shadow-lm-elegant {
+    box-shadow: var(--shadow-elegant);
+  }
+
+  .shadow-lm-glow {
+    box-shadow: var(--shadow-glow-red);
+  }
+
+  /* Service card styling */
+  .service-card {
+    @apply bg-black text-white rounded-lg overflow-hidden
+           transition-all duration-500 ease-in-out
+           hover:scale-105 hover:shadow-2xl
+           relative group;
+  }
+
+  .service-card::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-red-600/20 to-transparent
+           opacity-0 transition-opacity duration-300
+           group-hover:opacity-100;
+  }
+
+  .service-card-express {
+    @apply bg-blue-600;
+  }
+
+  .service-card-pro {
+    @apply bg-red-600;
+  }
+
+  .service-card-ultimate {
+    @apply bg-orange-500;
+  }
+
+  /* Layout helpers */
+  .grid-lm-services {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8;
+  }
+
+  .grid-lm-features {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6;
+  }
+
+  /* Text styles */
+  .title-lm {
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold leading-tight;
+  }
+
+  .subtitle-lm {
+    @apply text-xl md:text-2xl text-gray-600 dark:text-gray-300;
+  }
+
+  .description-lm {
+    @apply text-lg text-gray-700 dark:text-gray-200 leading-relaxed;
+  }
+
+  /* Form styles */
+  .input-lm {
+    @apply w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700
+           bg-white dark:bg-gray-900 text-gray-900 dark:text-white
+           focus:ring-2 focus:ring-red-500 focus:border-transparent
+           transition-all duration-200;
+  }
+
+  .textarea-lm {
+    @apply input-lm resize-none;
+  }
+
+  /* Navigation styles */
+  .nav-link-lm {
+    @apply text-gray-700 dark:text-gray-200 hover:text-red-600 dark:hover:text-red-400
+           font-medium transition-colors duration-200
+           relative;
+  }
+
+  .nav-link-lm::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-red-600
+           transition-all duration-300;
+  }
+
+  .nav-link-lm:hover::after {
+    @apply w-full;
+  }
+
+  /* Loading states */
+  .loading-lm {
+    @apply animate-pulse bg-gray-200 dark:bg-gray-800 rounded;
+  }
+
+  /* Admin styles */
+  .admin-card {
+    @apply bg-gray-800/50 border-gray-700 backdrop-blur-sm
+           rounded-lg shadow-lg
+           transition-all duration-300
+           hover:bg-gray-700/50;
+  }
+
+  .admin-input {
+    @apply bg-gray-900/50 border-gray-600 text-white
+           focus:border-red-500 focus:ring-red-500/20;
+  }
+
+  .admin-button {
+    @apply bg-red-600 hover:bg-red-700 text-white
+           transition-all duration-200
+           hover:scale-105 active:scale-95;
+  }
+
+  .status-badge-nouveau {
+    @apply bg-blue-600 text-white;
+  }
+
+  .status-badge-en-cours {
+    @apply bg-orange-500 text-white;
+  }
+
+  .status-badge-traite {
+    @apply bg-green-600 text-white;
+  }
+
+  .status-badge-annule {
+    @apply bg-red-600 text-white;
+  }
 }
 
 /* Animation Utilities */
