@@ -82,31 +82,37 @@ const Header = () => {
         {isMenuOpen && (
           <div className="md:hidden mt-4 pb-4 border-t">
             <div className="flex flex-col space-y-4 pt-4">
-              <button 
+              <button
                 onClick={() => scrollToSection('accueil')}
                 className="text-left text-foreground hover:text-primary transition-colors"
               >
                 Accueil
               </button>
-              <button 
+              <button
                 onClick={() => scrollToSection('services')}
                 className="text-left text-foreground hover:text-primary transition-colors"
               >
                 Services
               </button>
-              <button 
+              <button
                 onClick={() => scrollToSection('apropos')}
                 className="text-left text-foreground hover:text-primary transition-colors"
               >
                 À propos
               </button>
-              <button 
+              <button
                 onClick={() => scrollToSection('galerie')}
                 className="text-left text-foreground hover:text-primary transition-colors"
               >
                 Galerie
               </button>
-              <button 
+              <button
+                onClick={() => scrollToSection('reservation')}
+                className="text-left text-foreground hover:text-primary transition-colors"
+              >
+                Réservation
+              </button>
+              <button
                 onClick={() => scrollToSection('contact')}
                 className="text-left text-foreground hover:text-primary transition-colors"
               >
