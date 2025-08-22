@@ -111,7 +111,16 @@ Vous recevrez une confirmation par téléphone sous 24h.`);
   const isTimeSlotBooked = (time: string) => {
     if (!selectedDate) return false;
     const dateKey = format(selectedDate, "yyyy-MM-dd");
-    return bookedSlots[dateKey]?.includes(time) || false;
+
+    // Vérifier dans les réservations confirmées
+    const existingBookings = JSON.parse(localStorage.getItem('lm-bookings') || '[]');
+    const confirmedBookingsForDate = existingBookings.filter((booking: any) =>
+      booking.date === dateKey &&
+      booking.time === time &&
+      booking.statut === "confirmee"
+    );
+
+    return confirmedBookingsForDate.length > 0 || bookedSlots[dateKey]?.includes(time) || false;
   };
 
   const selectedServiceData = services.find(s => s.id === selectedService);
