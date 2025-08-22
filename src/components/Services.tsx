@@ -173,7 +173,7 @@ const Services = () => {
       {/* Logo LM Detailing */}
       <div className="flex justify-center pt-8 mb-8">
         <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center">
-          <img src="/src/assets/logo-lm-detailing.png" alt="LM Detailing" className="w-16 h-16 rounded-full" />
+          <img src="images/logo.jpg" alt="LM Detailing" className="w-16 h-16 rounded-full" />
         </div>
       </div>
 

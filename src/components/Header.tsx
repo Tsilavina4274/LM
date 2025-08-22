@@ -34,9 +34,13 @@ const Header = () => {
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b">
       <div className="container mx-auto px-4 py-4">
         <nav className="flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <img src={logoLM} alt="LM Detailing" className="h-12 w-12 rounded-full" />
-            <span className="text-xl font-bold">LM Detailing</span>
+          <div className="flex items-center space-x-3">
+            <img 
+              src="images/logo.jpg" 
+              alt="LM Detailing" 
+              className="h-16 w-16 rounded-full object-cover" 
+            />
+            <span className="text-2xl font-bold">LM Detailing</span>
           </div>
 
           {/* Desktop Navigation */}
@@ -131,7 +135,7 @@ const Header = () => {
               >
                 À propos
               </button>
-              
+
               {/* Services avec sous-menu mobile */}
               <div className="space-y-2">
                 <button
