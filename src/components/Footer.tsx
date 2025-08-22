@@ -78,9 +78,16 @@ const Footer = () => {
 
         <div className="flex flex-col md:flex-row justify-between items-center text-gray-400 text-sm">
           <p>&copy; {currentYear} LM Detailing. Tous droits réservés.</p>
-          <p className="mt-2 md:mt-0">
-            Detailing automobile premium à La Réunion
-          </p>
+          <div className="flex items-center gap-4 mt-2 md:mt-0">
+            <p>Detailing automobile premium à La Réunion</p>
+            <a
+              href="/login"
+              className="opacity-50 hover:opacity-100 transition-opacity text-xs"
+              title="Interface administrateur"
+            >
+              Admin
+            </a>
+          </div>
         </div>
       </div>
     </footer>
