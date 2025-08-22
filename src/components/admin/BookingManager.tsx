@@ -253,6 +253,7 @@ const BookingManager = () => {
 
   const stats = {
     total: bookings.length,
+    enAttente: bookings.filter(b => b.statut === "en_attente").length,
     confirmees: bookings.filter(b => b.statut === "confirmee").length,
     enCours: bookings.filter(b => b.statut === "en_cours").length,
     aujourd_hui: bookings.filter(b => b.date === format(new Date(), "yyyy-MM-dd")).length
@@ -419,7 +420,7 @@ const BookingManager = () => {
               </div>
 
               <div>
-                <label className="text-sm text-gray-400 mb-2 block">Véhicule</label>
+                <label className="text-sm text-gray-400 mb-2 block">V��hicule</label>
                 <Input
                   value={newBooking.client.vehicule}
                   onChange={(e) => setNewBooking(prev => ({ 
