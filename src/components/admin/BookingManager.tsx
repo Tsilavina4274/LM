@@ -179,7 +179,7 @@ const BookingManager = () => {
       time: newBooking.time,
       service: newBooking.service,
       client: newBooking.client,
-      statut: "confirmee",
+      statut: "confirmee", // Les réservations créées par l'admin sont directement confirmées
       lieu: newBooking.lieu as "atelier" | "domicile",
       prix: newBooking.prix,
       notes: newBooking.notes,
