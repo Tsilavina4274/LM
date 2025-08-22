@@ -63,9 +63,14 @@ const Login = () => {
 
       <Card className="w-full max-w-md bg-gray-800/50 border-gray-700 backdrop-blur-sm">
         <CardHeader className="text-center">
-          <div className="mx-auto w-20 h-20 bg-red-600 rounded-full flex items-center justify-center mb-4">
-            <Lock className="w-10 h-10 text-white" />
+          <div className="mx-auto w-20 h-20 rounded-full flex items-center justify-center mb-4 overflow-hidden">
+            <img 
+              src="images/logo.jpg" 
+              alt="Logo" 
+              className="w-full h-full object-cover" 
+            />
           </div>
+
           <CardTitle className="text-2xl font-bold text-white">
             Connexion Admin
           </CardTitle>
