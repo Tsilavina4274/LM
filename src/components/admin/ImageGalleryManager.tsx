@@ -17,7 +17,9 @@ import {
   Search,
   Filter,
   Download,
-  X
+  X,
+  CheckCircle,
+  Circle 
 } from "lucide-react";
 
 interface GalleryImage {
@@ -68,6 +70,14 @@ const ImageGalleryManager = () => {
     "Film Solaire", "Film Covering", "PPF Couleur"
   ];
 
+  const toggleImagePublication = (id: string) => {
+    const updatedImages = images.map(img =>
+      img.id === id ? { ...img, publiee: !img.publiee } : img
+    );
+    setImages(updatedImages);
+    localStorage.setItem('lm-gallery-images', JSON.stringify(updatedImages));
+  };
+
   // Charger les images depuis localStorage au démarrage
   useEffect(() => {
     const savedImages = localStorage.getItem('lm-gallery-images');
@@ -113,7 +123,7 @@ const ImageGalleryManager = () => {
           service: "Pro Protection",
           uploadDate: "2024-01-18",
           tags: ["ceramique", "protection", "carrosserie"],
-          publiee: false
+          publiee: true
         }
       ];
       setImages(defaultImages);
@@ -206,14 +216,6 @@ const ImageGalleryManager = () => {
     setIsAddModalOpen(false);
   };
 
-  const toggleImagePublication = (id: string) => {
-    const updatedImages = images.map(img =>
-      img.id === id ? { ...img, publiee: !img.publiee } : img
-    );
-    setImages(updatedImages);
-    localStorage.setItem('lm-gallery-images', JSON.stringify(updatedImages));
-  };
-
   const handleEditImage = () => {
     if (!selectedImage) return;
 
@@ -246,7 +248,9 @@ const ImageGalleryManager = () => {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
           <h2 className="text-2xl font-bold text-white">Gestion de la galerie</h2>
-          <p className="text-gray-400">{images.length} images au total</p>
+          <p className="text-gray-400">
+            {images.length} images au total • {images.filter(img => img.publiee).length} publiées
+          </p>
         </div>
 
         <Dialog open={isAddModalOpen} onOpenChange={setIsAddModalOpen}>
@@ -391,6 +395,21 @@ const ImageGalleryManager = () => {
                 className="w-full h-48 object-cover"
               />
               <div className="absolute top-2 right-2 flex gap-1">
+                {/* Bouton de publication/dépublication */}
+                <Button
+                  size="sm"
+                  variant={image.publiee ? "default" : "outline"}
+                  className={`w-8 h-8 p-0 ${image.publiee ? 'bg-green-600 hover:bg-green-700' : 'bg-gray-700/80 hover:bg-gray-600/80'}`}
+                  onClick={() => toggleImagePublication(image.id)}
+                  title={image.publiee ? "Dépublier l'image" : "Publier l'image"}
+                >
+                  {image.publiee ? (
+                    <CheckCircle className="w-4 h-4" />
+                  ) : (
+                    <Circle className="w-4 h-4" />
+                  )}
+                </Button>
+                
                 <Button
                   size="sm"
                   variant="secondary"
@@ -416,6 +435,15 @@ const ImageGalleryManager = () => {
                   <Trash2 className="w-4 h-4" />
                 </Button>
               </div>
+              
+              {/* Badge d'état de publication */}
+              {!image.publiee && (
+                <div className="absolute top-2 left-2">
+                  <Badge variant="outline" className="bg-yellow-600/80 text-white border-yellow-500 text-xs">
+                    Non publiée
+                  </Badge>
+                </div>
+              )}
             </div>
             
             <CardContent className="p-4">
@@ -431,6 +459,13 @@ const ImageGalleryManager = () => {
                     {image.service}
                   </Badge>
                 )}
+                {/* Badge d'état de publication */}
+                <Badge 
+                  variant={image.publiee ? "default" : "outline"} 
+                  className={image.publiee ? "bg-green-600 text-xs" : "bg-gray-700/80 text-gray-300 text-xs"}
+                >
+                  {image.publiee ? "Publiée" : "Non publiée"}
+                </Badge>
               </div>
 
               <div className="flex flex-wrap gap-1">

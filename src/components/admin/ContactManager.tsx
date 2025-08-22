@@ -155,8 +155,19 @@ Email: mouniamalorezo555@gmail.com
 Message original du ${format(new Date(selectedContact.dateEnvoi), "dd MMMM yyyy à HH:mm", { locale: fr })}:
 ${selectedContact.message}`;
 
-    const mailtoLink = `mailto:${selectedContact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.open(mailtoLink);
+    // const mailtoLink = `mailto:${selectedContact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const mailtoLink= `https://mail.google.com/mail/?view=cm&fs=1&to=${selectedContact.email}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+    try {
+      if (navigator.onLine) {
+        console.log('Ouverture de Gmail…');
+        window.open(mailtoLink, '_blank');
+      } else {
+        alert("Veuillez vérifier votre connexion Internet avant d'envoyer un message.");
+      }
+    } catch (error) {
+      console.error("Erreur lors de l'ouverture de Gmail :", error);
+      alert("Impossible d'ouvrir Gmail. Veuillez nous contacter manuellement à : " + selectedContact.email);
+    }
 
     // Sauvegarder la réponse
     const updatedContacts = contacts.map(contact =>
@@ -298,11 +309,11 @@ ${selectedContact.message}`;
                   <SelectItem value="nouveau">Nouveaux</SelectItem>
                   <SelectItem value="en_cours">En cours</SelectItem>
                   <SelectItem value="traite">Traités</SelectItem>
-                  <SelectItem value="archive">Archivés</SelectItem>
+                  {/* <SelectItem value="archive">Archivés</SelectItem> */}
                 </SelectContent>
               </Select>
             </div>
-            <div className="w-full md:w-48">
+            {/* <div className="w-full md:w-48">
               <Select value={filterPriority} onValueChange={setFilterPriority}>
                 <SelectTrigger className="bg-gray-900/50 border-gray-600 text-white">
                   <Star className="w-4 h-4 mr-2" />
@@ -315,7 +326,7 @@ ${selectedContact.message}`;
                   <SelectItem value="basse">Basse</SelectItem>
                 </SelectContent>
               </Select>
-            </div>
+            </div> */}
           </div>
         </CardContent>
       </Card>
@@ -385,11 +396,11 @@ ${selectedContact.message}`;
                         <SelectItem value="nouveau">Nouveau</SelectItem>
                         <SelectItem value="en_cours">En cours</SelectItem>
                         <SelectItem value="traite">Traité</SelectItem>
-                        <SelectItem value="archive">Archivé</SelectItem>
+                        {/* <SelectItem value="archive">Archivé</SelectItem> */}
                       </SelectContent>
                     </Select>
 
-                    <Select 
+                    {/* <Select 
                       value={contact.priorite || "normale"} 
                       onValueChange={(value) => updateContactPriority(contact.id, value as Contact['priorite'])}
                     >
@@ -401,7 +412,7 @@ ${selectedContact.message}`;
                         <SelectItem value="normale">Normale</SelectItem>
                         <SelectItem value="haute">Haute</SelectItem>
                       </SelectContent>
-                    </Select>
+                    </Select> */}
 
                     <div className="flex gap-1">
                       <Button
@@ -505,14 +516,14 @@ ${selectedContact.message}`;
                   <Reply className="w-4 h-4 mr-2" />
                   Répondre
                 </Button>
-                <Button
+                {/* <Button
                   variant="outline"
                   onClick={() => window.open(`mailto:${selectedContact.email}`, '_blank')}
                   className="border-gray-600 text-gray-300"
                 >
                   <Mail className="w-4 h-4 mr-2" />
                   Ouvrir email
-                </Button>
+                </Button> */}
                 <Button
                   variant="outline"
                   onClick={() => window.open(`tel:${selectedContact.telephone}`, '_blank')}
