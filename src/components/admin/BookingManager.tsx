@@ -41,7 +41,7 @@ interface Booking {
     vehicule: string;
     commentaires: string;
   };
-  statut: "confirmee" | "en_cours" | "terminee" | "annulee";
+  statut: "en_attente" | "confirmee" | "en_cours" | "terminee" | "annulee" | "refusee";
   lieu: "atelier" | "domicile";
   prix?: string;
   notes?: string;
