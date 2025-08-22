@@ -263,32 +263,7 @@ const Admin = () => {
 
           {/* Gestion des contacts */}
           <TabsContent value="contacts" className="space-y-6">
-            <Card className="bg-gray-800/50 border-gray-700">
-              <CardHeader>
-                <CardTitle className="text-white">Messages de contact</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {contacts.length === 0 ? (
-                    <p className="text-gray-400 text-center py-8">Aucun message pour le moment</p>
-                  ) : (
-                    contacts.map((contact: any, index: number) => (
-                      <div key={index} className="p-4 bg-gray-900/50 rounded-lg border border-gray-600">
-                        <div className="flex justify-between items-start mb-2">
-                          <h3 className="font-semibold text-white">{contact.nom}</h3>
-                          <Badge className="bg-blue-600">Nouveau</Badge>
-                        </div>
-                        <p className="text-sm text-gray-400 mb-2">
-                          <Mail className="w-4 h-4 inline mr-1" />
-                          {contact.email}
-                        </p>
-                        <p className="text-gray-300">{contact.message}</p>
-                      </div>
-                    ))
-                  )}
-                </div>
-              </CardContent>
-            </Card>
+            <ContactManager />
           </TabsContent>
 
           {/* Gestion de la galerie */}
