@@ -279,6 +279,18 @@ const BookingManager = () => {
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
+                <p className="text-sm text-gray-400">En attente</p>
+                <p className="text-2xl font-bold text-white">{stats.enAttente}</p>
+              </div>
+              <AlertTriangle className="w-8 h-8 text-yellow-500" />
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="bg-gray-800/50 border-gray-700">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <div>
                 <p className="text-sm text-gray-400">Confirmées</p>
                 <p className="text-2xl font-bold text-white">{stats.confirmees}</p>
               </div>
@@ -420,7 +432,7 @@ const BookingManager = () => {
               </div>
 
               <div>
-                <label className="text-sm text-gray-400 mb-2 block">V��hicule</label>
+                <label className="text-sm text-gray-400 mb-2 block">Véhicule</label>
                 <Input
                   value={newBooking.client.vehicule}
                   onChange={(e) => setNewBooking(prev => ({ 
