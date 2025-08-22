@@ -6,6 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import ImageGalleryManager from "@/components/admin/ImageGalleryManager";
 import ContactManager from "@/components/admin/ContactManager";
+import BookingManager from "@/components/admin/BookingManager";
 import {
   LogOut,
   Settings,
