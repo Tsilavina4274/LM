@@ -25,31 +25,37 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <button 
+            <button
               onClick={() => scrollToSection('accueil')}
               className="text-foreground hover:text-primary transition-colors"
             >
               Accueil
             </button>
-            <button 
+            <button
               onClick={() => scrollToSection('services')}
               className="text-foreground hover:text-primary transition-colors"
             >
               Services
             </button>
-            <button 
+            <button
               onClick={() => scrollToSection('apropos')}
               className="text-foreground hover:text-primary transition-colors"
             >
               À propos
             </button>
-            <button 
+            <button
               onClick={() => scrollToSection('galerie')}
               className="text-foreground hover:text-primary transition-colors"
             >
               Galerie
             </button>
-            <button 
+            <button
+              onClick={() => scrollToSection('reservation')}
+              className="text-foreground hover:text-primary transition-colors"
+            >
+              Réservation
+            </button>
+            <button
               onClick={() => scrollToSection('contact')}
               className="text-foreground hover:text-primary transition-colors"
             >
