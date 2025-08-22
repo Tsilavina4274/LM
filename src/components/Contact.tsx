@@ -19,7 +19,23 @@ const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
+    // Sauvegarder le contact dans localStorage pour l'admin
+    const newContact = {
+      id: Date.now().toString(),
+      nom: formData.name,
+      email: formData.email,
+      telephone: formData.phone,
+      service: formData.service,
+      message: formData.message,
+      dateEnvoi: new Date().toISOString(),
+      statut: "nouveau",
+      lu: false
+    };
+
+    const existingContacts = JSON.parse(localStorage.getItem('lm-contacts') || '[]');
+    localStorage.setItem('lm-contacts', JSON.stringify([newContact, ...existingContacts]));
+
     // Create mailto link with form data
     const subject = `Demande de devis - ${formData.service}`;
     const body = `Nom: ${formData.name}
@@ -29,13 +45,22 @@ Service souhaité: ${formData.service}
 
 Message:
 ${formData.message}`;
-    
+
     const mailtoLink = `mailto:mouniamalorezo555@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     window.open(mailtoLink);
-    
+
+    // Reset form
+    setFormData({
+      name: "",
+      email: "",
+      phone: "",
+      service: "",
+      message: ""
+    });
+
     toast({
       title: "Demande envoyée",
-      description: "Votre client email va s'ouvrir pour finaliser l'envoi.",
+      description: "Votre demande a été enregistrée et votre client email va s'ouvrir.",
     });
   };
 
