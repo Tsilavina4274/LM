@@ -90,17 +90,19 @@ const ImageGalleryManager = () => {
           category: "before-after",
           service: "Pro Rénovation",
           uploadDate: "2024-01-20",
-          tags: ["bmw", "avant", "renovation"]
+          tags: ["bmw", "avant", "renovation"],
+          publiee: true
         },
         {
-          id: "2", 
+          id: "2",
           url: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
           title: "BMW Serie 3 - Après traitement",
           description: "Résultat après notre service de rénovation Pro",
           category: "before-after",
           service: "Pro Rénovation",
           uploadDate: "2024-01-20",
-          tags: ["bmw", "après", "renovation", "brillance"]
+          tags: ["bmw", "après", "renovation", "brillance"],
+          publiee: true
         },
         {
           id: "3",
@@ -110,7 +112,8 @@ const ImageGalleryManager = () => {
           category: "protection",
           service: "Pro Protection",
           uploadDate: "2024-01-18",
-          tags: ["ceramique", "protection", "carrosserie"]
+          tags: ["ceramique", "protection", "carrosserie"],
+          publiee: false
         }
       ];
       setImages(defaultImages);
