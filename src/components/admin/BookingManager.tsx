@@ -522,9 +522,11 @@ const BookingManager = () => {
                 </SelectTrigger>
                 <SelectContent className="bg-gray-800 border-gray-600">
                   <SelectItem value="all">Tous les statuts</SelectItem>
+                  <SelectItem value="en_attente">En attente</SelectItem>
                   <SelectItem value="confirmee">Confirmées</SelectItem>
                   <SelectItem value="en_cours">En cours</SelectItem>
                   <SelectItem value="terminee">Terminées</SelectItem>
+                  <SelectItem value="refusee">Refusées</SelectItem>
                   <SelectItem value="annulee">Annulées</SelectItem>
                 </SelectContent>
               </Select>
