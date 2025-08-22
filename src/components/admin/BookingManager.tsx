@@ -232,10 +232,12 @@ const BookingManager = () => {
 
   const getStatusBadge = (statut: Booking['statut']) => {
     const statusConfig = {
+      en_attente: { label: "En attente", color: "bg-yellow-600", icon: AlertTriangle },
       confirmee: { label: "Confirmée", color: "bg-blue-600", icon: CheckCircle },
       en_cours: { label: "En cours", color: "bg-orange-500", icon: Clock },
       terminee: { label: "Terminée", color: "bg-green-600", icon: CheckCircle },
-      annulee: { label: "Annulée", color: "bg-red-600", icon: XCircle }
+      annulee: { label: "Annulée", color: "bg-red-600", icon: XCircle },
+      refusee: { label: "Refusée", color: "bg-gray-600", icon: XCircle }
     };
 
     const config = statusConfig[statut];
