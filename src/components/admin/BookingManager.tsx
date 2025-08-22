@@ -153,10 +153,30 @@ const BookingManager = () => {
     localStorage.setItem('lm-bookings', JSON.stringify(updatedBookings));
   };
 
+  // const updateBookingStatus = (bookingId: string, newStatus: Booking['statut']) => {
+  //   const updatedBookings = bookings.map(booking =>
+  //     booking.id === bookingId ? { ...booking, statut: newStatus } : booking
+  //   );
+  //   saveBookings(updatedBookings);
+  // };
+
   const updateBookingStatus = (bookingId: string, newStatus: Booking['statut']) => {
-    const updatedBookings = bookings.map(booking =>
-      booking.id === bookingId ? { ...booking, statut: newStatus } : booking
-    );
+    const updatedBookings = bookings.map(booking => {
+      if (booking.id === bookingId) {
+        const updatedBooking = { ...booking, statut: newStatus };
+        
+        // Envoyer un email automatique lors du changement de statut
+        if (newStatus === "confirmee" && booking.client.email) {
+          setTimeout(() => handleEmail(updatedBooking, 'confirmation'), 500);
+        } else if ((newStatus === "annulee" || newStatus === "refusee") && booking.client.email) {
+          setTimeout(() => handleEmail(updatedBooking, 'annulation'), 500);
+        }
+        
+        return updatedBooking;
+      }
+      return booking;
+    });
+    
     saveBookings(updatedBookings);
   };
 
@@ -250,6 +270,61 @@ const BookingManager = () => {
       </Badge>
     );
   };
+
+    const handleEmail = (booking: Booking, action: 'confirmation' | 'annulation' | 'custom' = 'confirmation', customMessage?: string) => {
+      if (!booking.client.email) {
+        alert("Aucun email n'est associé à ce rendez-vous");
+        return;
+      }
+
+      const email = booking.client.email;
+      
+      // Définir le sujet selon l'action
+      let subject = '';
+      if (action === 'confirmation') {
+        subject = `Confirmation de votre rendez-vous LM Detailing - ${format(new Date(booking.date), "dd/MM/yyyy")} à ${booking.time}`;
+      } else if (action === 'annulation') {
+        subject = `Annulation de votre rendez-vous LM Detailing - ${format(new Date(booking.date), "dd/MM/yyyy")}`;
+      } else {
+        subject = `LM Detailing - Concernant votre rendez-vous du ${format(new Date(booking.date), "dd/MM/yyyy")}`;
+      }
+
+      // Définir le corps du message selon l'action
+      let bodyContent = '';
+      if (action === 'confirmation') {
+        bodyContent = `Bonjour ${booking.client.prenom || booking.client.nom},\n\n` +
+          `Nous sommes ravis de vous confirmer votre rendez-vous pour le service "${booking.service}".\n\n` +
+          `📅 Date: ${format(new Date(booking.date), "dd MMMM yyyy", { locale: fr })}\n` +
+          `⏰ Heure: ${booking.time}\n` +
+          `📍 Lieu: ${booking.lieu === "domicile" ? "À votre domicile" : "Notre atelier"}\n` +
+          `🚗 Véhicule: ${booking.client.vehicule || "Non spécifié"}\n` +
+          `💶 Prix: ${booking.prix || "À confirmer"}\n\n` +
+          `Pour toute modification ou annulation, merci de nous contacter au moins 24h à l'avance.\n\n` +
+          `Cordialement,\nL'équipe LM Detailing\n📞 0262 XX XX XX`;
+      } else if (action === 'annulation') {
+        bodyContent = `Bonjour ${booking.client.prenom || booking.client.nom},\n\n` +
+          `Nous vous informons que votre rendez-vous prévu le ${format(new Date(booking.date), "dd MMMM yyyy", { locale: fr })} à ${booking.time} pour le service "${booking.service}" a été annulé.\n\n` +
+          `Si vous souhaitez reprogrammer un rendez-vous, n'hésitez pas à nous contacter.\n\n` +
+          `Cordialement,\nL'équipe LM Detailing\n📞 0262 XX XX XX`;
+      } else if (customMessage) {
+        bodyContent = customMessage;
+      }
+
+      const body = encodeURIComponent(bodyContent);
+      const gmailURL = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${encodeURIComponent(subject)}&body=${body}`;
+
+      try {
+        if (navigator.onLine) {
+          console.log('Ouverture de Gmail…');
+          window.open(gmailURL, '_blank');
+        } else {
+          alert("Veuillez vérifier votre connexion Internet avant d'envoyer un message.");
+        }
+      } catch (error) {
+        console.error("Erreur lors de l'ouverture de Gmail :", error);
+        alert("Impossible d'ouvrir Gmail. Veuillez nous contacter manuellement.");
+      }
+    };
 
   const stats = {
     total: bookings.length,
@@ -524,10 +599,10 @@ const BookingManager = () => {
                   <SelectItem value="all">Tous les statuts</SelectItem>
                   <SelectItem value="en_attente">En attente</SelectItem>
                   <SelectItem value="confirmee">Confirmées</SelectItem>
-                  <SelectItem value="en_cours">En cours</SelectItem>
-                  <SelectItem value="terminee">Terminées</SelectItem>
+                  {/* <SelectItem value="en_cours">En cours</SelectItem>
+                  <SelectItem value="terminee">Terminées</SelectItem> */}
                   <SelectItem value="refusee">Refusées</SelectItem>
-                  <SelectItem value="annulee">Annulées</SelectItem>
+                  {/* <SelectItem value="annulee">Annulées</SelectItem> */}
                 </SelectContent>
               </Select>
             </div>
@@ -575,7 +650,7 @@ const BookingManager = () => {
                       </Badge>
                       {booking.prix && (
                         <Badge className="bg-green-600 text-white text-xs">
-                          {booking.prix}
+                          Prix : {booking.prix} €
                         </Badge>
                       )}
                     </div>
@@ -641,6 +716,28 @@ const BookingManager = () => {
                       </div>
                     )}
 
+                    {/* Boutons d'email rapides
+                    {booking.client.email && (
+                      <div className="flex gap-1 mb-2">
+                        <Button
+                          size="sm"
+                          onClick={() => handleEmail(booking, 'confirmation')}
+                          className="bg-green-600 hover:bg-green-700 text-white text-xs px-2 py-1"
+                          title="Envoyer une confirmation"
+                        >
+                          <Mail className="w-3 h-3" />
+                        </Button>
+                        <Button
+                          size="sm"
+                          onClick={() => handleEmail(booking, 'annulation')}
+                          className="bg-red-600 hover:bg-red-700 text-white text-xs px-2 py-1"
+                          title="Envoyer une annulation"
+                        >
+                          <Mail className="w-3 h-3" />
+                        </Button>
+                      </div>
+                    )} */}
+
                     <Select
                       value={booking.statut}
                       onValueChange={(value) => updateBookingStatus(booking.id, value as Booking['statut'])}
@@ -651,9 +748,9 @@ const BookingManager = () => {
                       <SelectContent className="bg-gray-800 border-gray-600">
                         <SelectItem value="en_attente">En attente</SelectItem>
                         <SelectItem value="confirmee">Confirmée</SelectItem>
-                        <SelectItem value="en_cours">En cours</SelectItem>
-                        <SelectItem value="terminee">Terminée</SelectItem>
-                        <SelectItem value="annulee">Annulée</SelectItem>
+                        {/* <SelectItem value="en_cours">En cours</SelectItem>
+                        <SelectItem value="terminee">Terminée</SelectItem> */}
+                        {/* <SelectItem value="annulee">Annulée</SelectItem> */}
                         <SelectItem value="refusee">Refusée</SelectItem>
                       </SelectContent>
                     </Select>
@@ -779,15 +876,42 @@ const BookingManager = () => {
                   <Phone className="w-4 h-4 mr-2" />
                   Appeler
                 </Button>
+                
+                {/* Boutons d'email */}
                 {selectedBooking.client.email && (
-                  <Button
-                    variant="outline"
-                    onClick={() => window.open(`mailto:${selectedBooking.client.email}`, '_blank')}
-                    className="border-gray-600 text-gray-300"
-                  >
-                    <Mail className="w-4 h-4 mr-2" />
-                    Email
-                  </Button>
+                  <>
+                    <Button
+                      variant="outline"
+                      onClick={() => handleEmail(selectedBooking, 'confirmation')}
+                      className="border-green-600 text-green-300"
+                    >
+                      <Mail className="w-4 h-4 mr-2" />
+                      Confirmer RDV
+                    </Button>
+
+                    <Button
+                      variant="outline"
+                      onClick={() => handleEmail(selectedBooking, 'annulation')}
+                      className="border-red-600 text-red-300"
+                    >
+                      <Mail className="w-4 h-4 mr-2" />
+                      Annuler RDV
+                    </Button>
+
+                    {/* <Button
+                      variant="outline"
+                      onClick={() => {
+                        const customMessage = prompt("Entrez votre message personnalisé:");
+                        if (customMessage) {
+                          handleEmail(selectedBooking, 'custom', customMessage);
+                        }
+                      }}
+                      className="border-blue-600 text-blue-300"
+                    >
+                      <Mail className="w-4 h-4 mr-2" />
+                      Message perso
+                    </Button> */}
+                  </>
                 )}
               </div>
             </div>

@@ -111,10 +111,10 @@ const Admin = () => {
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
           {/* Navigation des onglets */}
           <TabsList className="grid w-full grid-cols-5 bg-gray-800/50 border-gray-700">
-            <TabsTrigger value="dashboard" className="data-[state=active]:bg-red-600">
+            {/* <TabsTrigger value="dashboard" className="data-[state=active]:bg-red-600">
               <BarChart className="w-4 h-4 mr-2" />
               Tableau de bord
-            </TabsTrigger>
+            </TabsTrigger> */}
             <TabsTrigger value="bookings" className="data-[state=active]:bg-red-600">
               <Calendar className="w-4 h-4 mr-2" />
               Réservations
@@ -134,7 +134,7 @@ const Admin = () => {
           </TabsList>
 
           {/* Tableau de bord */}
-          <TabsContent value="dashboard" className="space-y-6">
+          {/* <TabsContent value="dashboard" className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <Card className="bg-gray-800/50 border-gray-700">
                 <CardContent className="p-6">
@@ -183,10 +183,10 @@ const Admin = () => {
                   </div>
                 </CardContent>
               </Card>
-            </div>
+            </div> */}
 
             {/* Activité récente */}
-            <Card className="bg-gray-800/50 border-gray-700">
+            {/* <Card className="bg-gray-800/50 border-gray-700">
               <CardHeader>
                 <CardTitle className="text-white">Activité récente</CardTitle>
               </CardHeader>
@@ -206,7 +206,7 @@ const Admin = () => {
                 </div>
               </CardContent>
             </Card>
-          </TabsContent>
+          </TabsContent> */}
 
           {/* Gestion des réservations */}
           <TabsContent value="bookings" className="space-y-6">

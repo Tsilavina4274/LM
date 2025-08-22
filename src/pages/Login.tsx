@@ -19,8 +19,8 @@ const Login = () => {
 
   // Identifiants admin (en production, ils seraient stockés de manière sécurisée)
   const ADMIN_CREDENTIALS = {
-    username: "admin",
-    password: "LMDetailing2024!"
+    username: "admin@lmdetailing.com",
+    password: "LMDetailing2024@!"
   };
 
   const handleInputChange = (field: string, value: string) => {
@@ -138,13 +138,13 @@ const Login = () => {
             </Button>
           </form>
 
-          <div className="mt-6 p-4 bg-gray-900/50 rounded-lg border border-gray-600">
+          {/* <div className="mt-6 p-4 bg-gray-900/50 rounded-lg border border-gray-600">
             <h4 className="text-sm font-semibold text-white mb-2">Identifiants de test :</h4>
             <div className="text-xs text-gray-400 space-y-1">
               <p><strong>Utilisateur :</strong> admin</p>
               <p><strong>Mot de passe :</strong> LMDetailing2024!</p>
             </div>
-          </div>
+          </div> */}
         </CardContent>
       </Card>
     </div>
