@@ -4,12 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { 
-  LogOut, 
-  Settings, 
-  Users, 
-  Calendar, 
-  MessageSquare, 
+import ImageGalleryManager from "@/components/admin/ImageGalleryManager";
+import {
+  LogOut,
+  Settings,
+  Users,
+  Calendar,
+  MessageSquare,
   Images,
   BarChart,
   Phone,
