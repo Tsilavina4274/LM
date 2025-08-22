@@ -47,12 +47,34 @@ const Header = () => {
             >
               Accueil
             </button>
-            <button
-              onClick={() => scrollToSection('services')}
-              className="text-foreground hover:text-primary transition-colors"
-            >
-              Services
-            </button>
+
+            {/* Menu déroulant Services */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button className="flex items-center gap-1 text-foreground hover:text-primary transition-colors">
+                  Services
+                  <ChevronDown className="h-4 w-4" />
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56 bg-background border border-border">
+                <DropdownMenuItem
+                  onClick={() => scrollToSection('services')}
+                  className="cursor-pointer hover:bg-muted"
+                >
+                  Tous les services
+                </DropdownMenuItem>
+                {serviceTypes.map((service) => (
+                  <DropdownMenuItem
+                    key={service.id}
+                    onClick={() => scrollToService(service.id)}
+                    className="cursor-pointer hover:bg-muted"
+                  >
+                    {service.label}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+
             <button
               onClick={() => scrollToSection('apropos')}
               className="text-foreground hover:text-primary transition-colors"
