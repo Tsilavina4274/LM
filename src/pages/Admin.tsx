@@ -292,20 +292,7 @@ const Admin = () => {
 
           {/* Gestion de la galerie */}
           <TabsContent value="gallery" className="space-y-6">
-            <Card className="bg-gray-800/50 border-gray-700">
-              <CardHeader>
-                <CardTitle className="text-white">Gestion des images</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-center py-8">
-                  <Images className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                  <p className="text-gray-400 mb-4">Fonctionnalité de gestion d'images en cours de développement</p>
-                  <Button className="bg-red-600 hover:bg-red-700">
-                    Ajouter des images
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+            <ImageGalleryManager />
           </TabsContent>
 
           {/* Paramètres */}
