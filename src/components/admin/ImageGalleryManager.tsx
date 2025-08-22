@@ -185,7 +185,8 @@ const ImageGalleryManager = () => {
       category: newImage.category,
       service: newImage.service,
       uploadDate: new Date().toISOString().split('T')[0],
-      tags: newImage.tags.split(',').map(tag => tag.trim()).filter(tag => tag)
+      tags: newImage.tags.split(',').map(tag => tag.trim()).filter(tag => tag),
+      publiee: false // Par défaut, les nouvelles images ne sont pas publiées
     };
 
     const updatedImages = [...images, newImageData];
@@ -203,6 +204,14 @@ const ImageGalleryManager = () => {
     });
     setPreviewUrl(null);
     setIsAddModalOpen(false);
+  };
+
+  const toggleImagePublication = (id: string) => {
+    const updatedImages = images.map(img =>
+      img.id === id ? { ...img, publiee: !img.publiee } : img
+    );
+    setImages(updatedImages);
+    localStorage.setItem('lm-gallery-images', JSON.stringify(updatedImages));
   };
 
   const handleEditImage = () => {
