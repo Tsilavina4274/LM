@@ -618,18 +618,41 @@ const BookingManager = () => {
                   </div>
 
                   <div className="flex flex-col gap-2">
-                    <Select 
-                      value={booking.statut} 
+                    {/* Boutons rapides pour les réservations en attente */}
+                    {booking.statut === "en_attente" && (
+                      <div className="flex gap-1 mb-2">
+                        <Button
+                          size="sm"
+                          onClick={() => updateBookingStatus(booking.id, "confirmee")}
+                          className="bg-green-600 hover:bg-green-700 text-white text-xs px-3 py-1"
+                        >
+                          Confirmer
+                        </Button>
+                        <Button
+                          size="sm"
+                          variant="destructive"
+                          onClick={() => updateBookingStatus(booking.id, "refusee")}
+                          className="bg-red-600 hover:bg-red-700 text-white text-xs px-3 py-1"
+                        >
+                          Refuser
+                        </Button>
+                      </div>
+                    )}
+
+                    <Select
+                      value={booking.statut}
                       onValueChange={(value) => updateBookingStatus(booking.id, value as Booking['statut'])}
                     >
                       <SelectTrigger className="bg-gray-900/50 border-gray-600 text-white text-xs w-32">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent className="bg-gray-800 border-gray-600">
+                        <SelectItem value="en_attente">En attente</SelectItem>
                         <SelectItem value="confirmee">Confirmée</SelectItem>
                         <SelectItem value="en_cours">En cours</SelectItem>
                         <SelectItem value="terminee">Terminée</SelectItem>
                         <SelectItem value="annulee">Annulée</SelectItem>
+                        <SelectItem value="refusee">Refusée</SelectItem>
                       </SelectContent>
                     </Select>
 
@@ -642,7 +665,7 @@ const BookingManager = () => {
                       >
                         <Eye className="w-4 h-4" />
                       </Button>
-                      
+
                       <Button
                         size="sm"
                         variant="outline"
