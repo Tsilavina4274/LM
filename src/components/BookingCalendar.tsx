@@ -67,25 +67,33 @@ const BookingCalendar = () => {
 
     const dateKey = format(selectedDate, "yyyy-MM-dd");
     const newBooking = {
+      id: Date.now().toString(),
       date: dateKey,
       time: selectedTime,
       service: selectedService,
-      client: bookingForm,
-      id: Date.now().toString()
+      client: {
+        nom: bookingForm.nom,
+        prenom: bookingForm.prenom,
+        telephone: bookingForm.telephone,
+        email: bookingForm.email,
+        vehicule: bookingForm.vehicule,
+        commentaires: bookingForm.commentaires
+      },
+      statut: "en_attente", // Les clients créent des réservations en attente
+      lieu: "atelier", // Par défaut
+      dateCreation: new Date().toISOString()
     };
 
-    // Ajouter le créneau aux créneaux occupés
-    setBookedSlots(prev => ({
-      ...prev,
-      [dateKey]: [...(prev[dateKey] || []), selectedTime]
-    }));
+    // NE PAS ajouter le créneau aux créneaux occupés immédiatement
+    // Il ne sera occupé qu'après confirmation par l'admin
 
-    // Sauvegarder la réservation (ici on simule, en réalité on l'enverrait à une API)
+    // Sauvegarder la réservation en attente
     const existingBookings = JSON.parse(localStorage.getItem('lm-bookings') || '[]');
-    localStorage.setItem('lm-bookings', JSON.stringify([...existingBookings, newBooking]));
+    localStorage.setItem('lm-bookings', JSON.stringify([newBooking, ...existingBookings]));
 
-    alert(`Réservation confirmée pour le ${format(selectedDate, "dd MMMM yyyy", { locale: fr })} à ${selectedTime}`);
-    
+    alert(`Votre demande de réservation a été envoyée pour le ${format(selectedDate, "dd MMMM yyyy", { locale: fr })} à ${selectedTime}.
+Vous recevrez une confirmation par téléphone sous 24h.`);
+
     // Reset du formulaire
     setBookingForm({
       nom: "",
