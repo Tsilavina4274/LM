@@ -210,56 +210,7 @@ const Admin = () => {
 
           {/* Gestion des réservations */}
           <TabsContent value="bookings" className="space-y-6">
-            <Card className="bg-gray-800/50 border-gray-700">
-              <CardHeader>
-                <CardTitle className="text-white">Gestion des réservations</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {bookings.length === 0 ? (
-                    <p className="text-gray-400 text-center py-8">Aucune réservation pour le moment</p>
-                  ) : (
-                    bookings.map((booking: any, index: number) => (
-                      <div key={index} className="p-4 bg-gray-900/50 rounded-lg border border-gray-600">
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                          <div>
-                            <h3 className="font-semibold text-white">{booking.client.nom} {booking.client.prenom}</h3>
-                            <p className="text-sm text-gray-400">
-                              <Phone className="w-4 h-4 inline mr-1" />
-                              {booking.client.telephone}
-                            </p>
-                            {booking.client.email && (
-                              <p className="text-sm text-gray-400">
-                                <Mail className="w-4 h-4 inline mr-1" />
-                                {booking.client.email}
-                              </p>
-                            )}
-                          </div>
-                          <div>
-                            <p className="text-white font-medium">{booking.service}</p>
-                            <p className="text-sm text-gray-400">{booking.date} à {booking.time}</p>
-                            {booking.client.vehicule && (
-                              <p className="text-sm text-gray-400">Véhicule: {booking.client.vehicule}</p>
-                            )}
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <Badge className="bg-green-600">Confirmée</Badge>
-                            <Button size="sm" variant="outline" className="border-gray-600 text-gray-300">
-                              Modifier
-                            </Button>
-                          </div>
-                        </div>
-                        {booking.client.commentaires && (
-                          <div className="mt-3 p-3 bg-gray-800/50 rounded">
-                            <p className="text-sm text-gray-300">{booking.client.commentaires}</p>
-                          </div>
-                        )}
-                      </div>
-                    ))
-                  )}
-                </div>
-              </CardContent>
-            </Card>
+            <BookingManager />
           </TabsContent>
 
           {/* Gestion des contacts */}
