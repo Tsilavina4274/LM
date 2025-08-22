@@ -126,12 +126,28 @@ const Header = () => {
               >
                 Accueil
               </button>
-              <button
-                onClick={() => scrollToSection('services')}
-                className="text-left text-foreground hover:text-primary transition-colors"
-              >
-                Services
-              </button>
+
+              {/* Services avec sous-menu mobile */}
+              <div className="space-y-2">
+                <button
+                  onClick={() => scrollToSection('services')}
+                  className="text-left text-foreground hover:text-primary transition-colors font-medium"
+                >
+                  Services
+                </button>
+                <div className="pl-4 space-y-2">
+                  {serviceTypes.map((service) => (
+                    <button
+                      key={service.id}
+                      onClick={() => scrollToService(service.id)}
+                      className="block text-left text-sm text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      • {service.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
               <button
                 onClick={() => scrollToSection('apropos')}
                 className="text-left text-foreground hover:text-primary transition-colors"
