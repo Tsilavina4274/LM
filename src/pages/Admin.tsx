@@ -80,7 +80,7 @@ const Admin = () => {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <img src="/src/assets/logo-lm-detailing.png" alt="LM Detailing" className="w-10 h-10 rounded-full" />
+              <img src="images/logo.jpg" alt="LM Detailing" className="w-10 h-10 rounded-full" />
               <div>
                 <h1 className="text-xl font-bold text-white">LM Detailing Admin</h1>
                 <p className="text-sm text-gray-400">Interface d'administration</p>
